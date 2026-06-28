@@ -1,0 +1,190 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Outfit', sans-serif;
+}
+
+:root {
+    --bg-color: #ffffff;
+    --text-primary: #000000;
+    --text-secondary: #666666;
+}
+
+body.dark-mode {
+    --bg-color: #0a0a0a;
+    --text-primary: #ffffff;
+    --text-secondary: #a0a0a0;
+}
+
+body {
+    background-color: var(--bg-color);
+    color: var(--text-primary);
+    height: 100vh;
+    overflow: hidden;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end; /* Push content to bottom */
+    padding: 3rem 5%; /* Space from the edges */
+    cursor: none;
+    transition: background-color 0.5s ease;
+}
+
+/* Custom cursor */
+.cursor {
+    width: 20px;
+    height: 20px;
+    background-color: #ffffff; /* White so it acts as an inverter */
+    border-radius: 50%;
+    position: fixed;
+    top: 0;
+    left: 0;
+    pointer-events: none;
+    z-index: 9999;
+    transform: translate(-50%, -50%);
+    mix-blend-mode: difference; /* This handles the inversion */
+    transition: width 0.3s, height 0.3s;
+}
+
+.cursor.hovering {
+    width: 60px; /* Make it a bit larger on hover for emphasis */
+    height: 60px;
+}
+
+.layout-left {
+    position: relative;
+    z-index: 2;
+    text-align: left;
+    max-width: 50%;
+    pointer-events: auto;
+    padding-bottom: 2rem;
+}
+
+.layout-right {
+    position: relative;
+    z-index: 2;
+    text-align: right;
+    pointer-events: auto;
+    padding-bottom: 2rem;
+}
+
+#theme-toggle {
+    position: absolute;
+    top: 3rem;
+    right: 5%;
+    background: none;
+    border: none;
+    z-index: 2;
+    animation: fadeIn 2s ease-out;
+}
+
+h1 {
+    font-size: clamp(3rem, 8vw, 6rem);
+    font-weight: 500;
+    letter-spacing: -2px;
+    color: var(--text-primary);
+    animation: fadeIn 2s ease-out;
+}
+
+p {
+    font-size: clamp(1rem, 1.5vw, 1.25rem);
+    color: var(--text-secondary);
+    font-weight: 300;
+    margin-bottom: 0;
+    margin-top: -0.5rem;
+    animation: fadeIn 2s ease-out 0.5s both;
+}
+
+/* Make sure text allows cursor inversion to work reliably */
+.layout-left, .layout-right {
+    position: relative;
+    z-index: 1; /* Drop beneath cursor so it overlays */
+}
+
+.links {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 1.5rem;
+    animation: fadeIn 2s ease-out 1s both;
+}
+
+.magnetic-btn {
+    display: inline-block;
+    padding: 5px 10px;
+    color: var(--text-primary);
+    text-decoration: none;
+    font-size: 1.1rem;
+    font-weight: 400;
+    text-transform: lowercase; /* Lowercase for an understated look */
+    letter-spacing: 0.5px;
+    position: relative;
+    cursor: none;
+    border-radius: 30px; 
+}
+
+/* Span is targeted by JS for the inner parallax movement */
+.magnetic-btn span {
+    display: inline-block;
+    pointer-events: none;
+    transition: transform 0.1s linear;
+}
+
+/* Removal of default text underline hover */
+.magnetic-btn::after {
+    display: none;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Mobile Responsiveness */
+@media (max-width: 768px) {
+    body {
+        flex-direction: column;
+        justify-content: flex-end; /* Keep content at bottom */
+        align-items: flex-start; /* Align everything to left on mobile */
+        padding: 2rem;
+    }
+
+    .layout-left {
+        max-width: 100%;
+        padding-bottom: 1rem;
+    }
+
+    .layout-right {
+        text-align: left;
+        width: 100%;
+        padding-bottom: 0;
+    }
+
+    .links {
+        align-items: flex-start; /* Stack links on left mobile */
+        gap: 1rem;
+        flex-direction: row;
+        flex-wrap: wrap; /* Let them wrap if they need to */
+    }
+
+    #theme-toggle {
+        top: 2rem;
+        right: 2rem; /* Keep toggle top right on mobile */
+    }
+
+    /* Disable custom cursor entirely on mobile devices 
+       (no hover capabilities, ruins touch UX) */
+    .cursor {
+        display: none;
+    }
+    
+    body, .magnetic-btn {
+        cursor: auto;
+    }
+}
