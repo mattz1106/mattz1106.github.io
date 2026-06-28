@@ -44,7 +44,7 @@ body {
     pointer-events: none;
     z-index: 9999;
     /* Remove transform from transition, otherwise it lags */
-    transition: width 0.3s, height 0.3s, opacity 0.3s;
+    transition: width 0.9s cubic-bezier(0.16, 1, 0.3, 1), height 0.9s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.3s;
     opacity: 0; /* Hide initially until mouse moves */
     mix-blend-mode: difference; /* This handles the inversion */
 }
@@ -84,7 +84,7 @@ body {
     color: var(--text-secondary);
     margin-bottom: 2rem;
     letter-spacing: 1px;
-    animation: textFocusIn 2s ease-out;
+    animation: textFocusIn 2s ease-out 0.2s both; /* added slight delay and 'both' fill mode */
     margin-left: 0.2rem;
 }
 .layout-right {
@@ -102,7 +102,7 @@ body {
     background: none;
     border: none;
     z-index: 2;
-    animation: textFocusIn 2s ease-out;
+    animation: textFocusIn 2s ease-out 0.8s both; /* Delayed to appear later */
 }
 
 h1 {
@@ -137,8 +137,13 @@ p {
     flex-direction: column;
     align-items: flex-end;
     gap: 2rem; /* Increased from 1.5rem */
-    animation: textFocusIn 1.5s cubic-bezier(0.25, 0.46, 0.45, 0.94) 1s both;
 }
+
+/* Stagger the links loading */
+.link-1 { animation: textFocusIn 1.5s cubic-bezier(0.25, 0.46, 0.45, 0.94) 0.8s both; }
+.link-2 { animation: textFocusIn 1.5s cubic-bezier(0.25, 0.46, 0.45, 0.94) 0.9s both; }
+.link-3 { animation: textFocusIn 1.5s cubic-bezier(0.25, 0.46, 0.45, 0.94) 1.0s both; }
+.link-4 { animation: textFocusIn 1.5s cubic-bezier(0.25, 0.46, 0.45, 0.94) 1.1s both; }
 
 .magnetic-btn {
     display: inline-block;
@@ -152,14 +157,15 @@ p {
     letter-spacing: 0.5px;
     position: relative;
     cursor: none;
-    border-radius: 30px; 
+    border-radius: 30px;
+    transition: transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 /* Span is targeted by JS for the inner parallax movement */
 .magnetic-btn span {
     display: inline-block;
     pointer-events: none;
-    transition: transform 0.1s linear;
+    transition: transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .magnetic-btn::after {

@@ -76,20 +76,32 @@ magneticBtns.forEach((btn) => {
         const x = e.clientX - position.left - position.width / 2;
         const y = e.clientY - position.top - position.height / 2;
         
-        btn.style.transform = `translate(${x * 0.25}px, ${y * 0.25}px)`;
+        // Add a smooth short transition for tracking so it feels "pulled"
+        btn.style.transition = 'transform 0.1s linear';
         const span = btn.querySelector('span');
-        if(span) span.style.transform = `translate(${x * 0.15}px, ${y * 0.15}px)`;
+        if(span) span.style.transition = 'transform 0.1s linear';
+        
+        btn.style.transform = `translate(${x * 0.4}px, ${y * 0.4}px)`;
+        if(span) span.style.transform = `translate(${x * 0.25}px, ${y * 0.25}px)`;
     });
 
     btn.addEventListener('mouseenter', () => {
         cursor.classList.add('hovering');
+        // Let CSS handle the scale transition
         playHoverSound();
     });
 
     btn.addEventListener('mouseleave', () => {
+        // Restore smooth springing transition when mouse leaves
+        btn.style.transition = 'transform 0.8s cubic-bezier(0.16, 1, 0.3, 1)';
         btn.style.transform = 'translate(0px, 0px)';
+        
         const span = btn.querySelector('span');
-        if(span) span.style.transform = 'translate(0px, 0px)';
+        if(span) {
+            span.style.transition = 'transform 0.8s cubic-bezier(0.16, 1, 0.3, 1)';
+            span.style.transform = 'translate(0px, 0px)';
+        }
+        
         cursor.classList.remove('hovering');
     });
 });
