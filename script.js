@@ -44,6 +44,43 @@ themeToggle.addEventListener('click', () => {
 
 const hoverSound = new Audio('data:audio/wav;base64,UklGRqAFAABXQVZFZm10IBAAAAABAAEAQB8AAEAfAAABAAgAZGF0YQAAAAA='); 
 
+const DISCORD_ID = '800592695843356702';
+const spotifyStatus = document.getElementById('spotify-status');
+
+function connectLanyard() {
+    const ws = new WebSocket('wss://api.lanyard.rest/socket');
+    
+    ws.onmessage = (event) => {
+        const data = JSON.parse(event.data);
+        
+        if (data.op === 1) {
+            ws.send(JSON.stringify({
+                op: 2,
+                d: { subscribe_to_id: DISCORD_ID }
+            }));
+        } else if (data.op === 0) {
+            updateSpotify(data.d);
+        }
+    };
+
+    ws.onclose = () => {
+        setTimeout(connectLanyard, 5000); 
+    };
+}
+
+function updateSpotify(data) {
+    if (data.spotify) {
+        const title = data.spotify.song;
+        const artist = data.spotify.artist.split(';')[0]; 
+        
+        spotifyStatus.innerHTML = `<span>♫ Spotify: ${title} - ${artist}</span>`;
+    } else {
+        spotifyStatus.innerHTML = `<span>♫ Spotify: Not playing</span>`;
+    }
+}
+
+connectLanyard();
+
 const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
 function playHoverSound() {
     if (audioCtx.state === 'suspended') {

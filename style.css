@@ -72,16 +72,24 @@ body {
 }
 
 
-.local-time {
-    font-family: 'Outfit', monospace;
+.spotify-status {
+    font-family: 'Outfit', sans-serif;
     font-size: 0.9rem;
     font-weight: 400;
     color: var(--text-secondary);
     margin-bottom: 2rem;
-    letter-spacing: 1px;
+    letter-spacing: 0.5px;
     animation: textFocusIn 2s ease-out 0.2s both;
     margin-left: 0.2rem;
+    display: inline-flex;
+    align-items: center;
+    cursor: none; 
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 100%;
 }
+
 .layout-right {
     position: relative;
     z-index: 2;
