@@ -26,42 +26,37 @@ body {
     overflow: hidden;
     display: flex;
     justify-content: space-between;
-    align-items: flex-end; /* Push content to bottom */
-    padding: 3rem 5%; /* Space from the edges */
+    align-items: flex-end;
+    padding: 3rem 5%;
     cursor: none;
     transition: background-color 0.5s ease;
 }
 
-/* Custom cursor */
 .cursor {
     width: 20px;
     height: 20px;
-    background-color: #ffffff; /* White so it acts as an inverter */
+    background-color: #ffffff;
     border-radius: 50%;
     position: fixed;
-    top: -10px; /* Initially hidden slightly offscreen or just depend on transform */
+    top: -10px;
     left: -10px;
     pointer-events: none;
     z-index: 9999;
-    /* Remove transform from transition, otherwise it lags */
     transition: width 0.9s cubic-bezier(0.16, 1, 0.3, 1), height 0.9s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.3s;
-    opacity: 0; /* Hide initially until mouse moves */
-    mix-blend-mode: difference; /* This handles the inversion */
+    opacity: 0;
+    mix-blend-mode: difference;
 }
 
-/* Base clicking */
 .cursor.clicking {
     width: 15px;
     height: 15px;
 }
 
-/* Hovering over links */
 .cursor.hovering {
-    width: 60px; /* Make it a bit larger on hover for emphasis */
+    width: 60px;
     height: 60px;
 }
 
-/* Override hovering width if it is also clicking (pulse down while hovering) */
 .cursor.hovering.clicking {
     width: 50px;
     height: 50px;
@@ -84,7 +79,7 @@ body {
     color: var(--text-secondary);
     margin-bottom: 2rem;
     letter-spacing: 1px;
-    animation: textFocusIn 2s ease-out 0.2s both; /* added slight delay and 'both' fill mode */
+    animation: textFocusIn 2s ease-out 0.2s both;
     margin-left: 0.2rem;
 }
 .layout-right {

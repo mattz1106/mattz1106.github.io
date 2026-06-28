@@ -44,7 +44,6 @@ themeToggle.addEventListener('click', () => {
 
 const hoverSound = new Audio('data:audio/wav;base64,UklGRqAFAABXQVZFZm10IBAAAAABAAEAQB8AAEAfAAABAAgAZGF0YQAAAAA='); 
 
-
 const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
 function playHoverSound() {
     if (audioCtx.state === 'suspended') {
@@ -54,11 +53,11 @@ function playHoverSound() {
     const gainNode = audioCtx.createGain();
     
     oscillator.type = 'sine';
-    oscillator.frequency.setValueAtTime(800, audioCtx.currentTime); // Pitch
-    oscillator.frequency.exponentialRampToValueAtTime(100, audioCtx.currentTime + 0.05); // Snap pitch down quickly
+    oscillator.frequency.setValueAtTime(800, audioCtx.currentTime);
+    oscillator.frequency.exponentialRampToValueAtTime(100, audioCtx.currentTime + 0.05);
     
     gainNode.gain.setValueAtTime(0, audioCtx.currentTime);
-    gainNode.gain.linearRampToValueAtTime(0.05, audioCtx.currentTime + 0.01); // Very quiet
+    gainNode.gain.linearRampToValueAtTime(0.05, audioCtx.currentTime + 0.01);
     gainNode.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + 0.05);
     
     oscillator.connect(gainNode);
@@ -76,7 +75,6 @@ magneticBtns.forEach((btn) => {
         const x = e.clientX - position.left - position.width / 2;
         const y = e.clientY - position.top - position.height / 2;
         
-        // Add a smooth short transition for tracking so it feels "pulled"
         btn.style.transition = 'transform 0.1s linear';
         const span = btn.querySelector('span');
         if(span) span.style.transition = 'transform 0.1s linear';
@@ -87,12 +85,10 @@ magneticBtns.forEach((btn) => {
 
     btn.addEventListener('mouseenter', () => {
         cursor.classList.add('hovering');
-        // Let CSS handle the scale transition
         playHoverSound();
     });
 
     btn.addEventListener('mouseleave', () => {
-        // Restore smooth springing transition when mouse leaves
         btn.style.transition = 'transform 0.8s cubic-bezier(0.16, 1, 0.3, 1)';
         btn.style.transform = 'translate(0px, 0px)';
         
