@@ -3,6 +3,8 @@
     padding: 0;
     box-sizing: border-box;
     font-family: 'Outfit', sans-serif;
+    user-select: none;
+    -webkit-user-select: none;
 }
 
 :root {
@@ -43,7 +45,8 @@ body {
     z-index: 9999;
     transform: translate(-50%, -50%);
     mix-blend-mode: difference; /* This handles the inversion */
-    transition: width 0.3s, height 0.3s;
+    transition: width 0.3s, height 0.3s, opacity 0.3s;
+    opacity: 1;
 }
 
 .cursor.hovering {

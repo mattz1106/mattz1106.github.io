@@ -1,10 +1,26 @@
 const cursor = document.querySelector('.cursor');
 const magneticBtns = document.querySelectorAll('.magnetic-btn');
 
+// Disable right click
+window.addEventListener('contextmenu', (e) => {
+    e.preventDefault();
+});
+
+// Disable dragging
+window.addEventListener('dragstart', (e) => {
+    e.preventDefault();
+});
+
 // Smoothly follow the mouse with the custom cursor
 window.addEventListener('mousemove', (e) => {
     // We use a small delay via requestAnimationFrame or direct transform for perf
+    cursor.style.opacity = '1';
     cursor.style.transform = `translate(${e.clientX}px, ${e.clientY}px) translate(-50%, -50%)`;
+});
+
+// Hide cursor when leaving window
+window.addEventListener('mouseleave', () => {
+    cursor.style.opacity = '0';
 });
 
 // Magnetic Button Logic
@@ -19,12 +35,12 @@ magneticBtns.forEach((btn) => {
         const x = e.pageX - position.left - position.width / 2;
         const y = e.pageY - position.top - position.height / 2;
 
-        // Move the button container slightly towards the mouse
-        btn.style.transform = `translate(${x * 0.3}px, ${y * 0.5}px)`;
+        // Move the button container slightly towards the mouse (more sticky)
+        btn.style.transform = `translate(${x * 0.4}px, ${y * 0.4}px)`;
         
         // Move the text inside a bit further for a 3D parallax effect
         const span = btn.querySelector('span');
-        if(span) span.style.transform = `translate(${x * 0.2}px, ${y * 0.2}px)`;
+        if(span) span.style.transform = `translate(${x * 0.25}px, ${y * 0.25}px)`;
     });
 
     btn.addEventListener('mouseenter', () => {
