@@ -233,8 +233,7 @@ p {
         right: 2rem; /* Keep toggle top right on mobile */
     }
 
-    /* Disable custom cursor entirely on mobile devices 
-       (no hover capabilities, ruins touch UX) */
+    /* Disable custom cursor entirely on mobile devices */
     .cursor {
         display: none;
     }
