@@ -73,9 +73,9 @@ function updateSpotify(data) {
         const title = data.spotify.song;
         const artist = data.spotify.artist.split(';')[0]; 
         
-        spotifyStatus.innerHTML = `<span>♫ Spotify: ${title} - ${artist}</span>`;
+        spotifyStatus.innerHTML = `<span>♫ Currently Listening: ${title} - ${artist}</span>`;
     } else {
-        spotifyStatus.innerHTML = `<span>♫ Spotify: Not playing</span>`;
+        spotifyStatus.innerHTML = `<span>♫ Currently Listening: Not playing</span>`;
     }
 }
 
