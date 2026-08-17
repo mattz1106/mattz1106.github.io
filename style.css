@@ -33,31 +33,6 @@ body {
     transition: background-color 0.5s ease;
 }
 
-@media (max-width: 768px) {
-    body {
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-        padding-top: 6rem;
-    }
-
-    .layout-left {
-        max-width: 100%;
-        text-align: center;
-        margin-bottom: 2rem;
-    }
-
-    .layout-right {
-        text-align: center;
-        width: 100%;
-    }
-
-    .links {
-        align-items: center;
-    }
-}
-
-
 .cursor {
     width: 20px;
     height: 20px;
@@ -178,10 +153,6 @@ p {
     transition: transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-.magnetic-btn::after {
-    display: none;
-}
-
 @keyframes blurReveal {
     0% {
         opacity: 0;
@@ -217,29 +188,19 @@ p {
     }
 }
 
-@keyframes fadeIn {
-    from {
-        opacity: 0;
-        transform: translateY(20px);
-    }
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
-}
-
 /* Mobile Responsiveness */
 @media (max-width: 768px) {
     body {
         flex-direction: column;
-        justify-content: flex-end; /* Keep content at bottom */
-        align-items: flex-start; /* Align everything to left on mobile */
+        justify-content: center; /* Balance the content vertically instead of pinning it to the bottom */
+        align-items: flex-start; /* Keep the left-aligned look from desktop */
         padding: 2rem;
+        gap: 3rem;
     }
 
     .layout-left {
         max-width: 100%;
-        padding-bottom: 1rem;
+        padding-bottom: 0;
     }
 
     .layout-right {
@@ -250,7 +211,7 @@ p {
 
     .links {
         align-items: flex-start; /* Stack links on left mobile */
-        gap: 1rem;
+        gap: 1.25rem 2rem;
         flex-direction: row;
         flex-wrap: wrap; /* Let them wrap if they need to */
     }
