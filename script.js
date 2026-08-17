@@ -42,8 +42,6 @@ themeToggle.addEventListener('click', () => {
     }
 });
 
-const hoverSound = new Audio('data:audio/wav;base64,UklGRqAFAABXQVZFZm10IBAAAAABAAEAQB8AAEAfAAABAAgAZGF0YQAAAAA='); 
-
 const DISCORD_ID = '800592695843356702';
 const spotifyStatus = document.getElementById('spotify-status');
 
@@ -81,29 +79,6 @@ function updateSpotify(data) {
 
 connectLanyard();
 
-const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
-function playHoverSound() {
-    if (audioCtx.state === 'suspended') {
-        audioCtx.resume();
-    }
-    const oscillator = audioCtx.createOscillator();
-    const gainNode = audioCtx.createGain();
-    
-    oscillator.type = 'sine';
-    oscillator.frequency.setValueAtTime(800, audioCtx.currentTime);
-    oscillator.frequency.exponentialRampToValueAtTime(100, audioCtx.currentTime + 0.05);
-    
-    gainNode.gain.setValueAtTime(0, audioCtx.currentTime);
-    gainNode.gain.linearRampToValueAtTime(0.05, audioCtx.currentTime + 0.01);
-    gainNode.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + 0.05);
-    
-    oscillator.connect(gainNode);
-    gainNode.connect(audioCtx.destination);
-    
-    oscillator.start();
-    oscillator.stop(audioCtx.currentTime + 0.05);
-}
-
 magneticBtns.forEach((btn) => {
     btn.addEventListener('mousemove', (e) => {
         if (window.innerWidth <= 768) return;
@@ -122,7 +97,6 @@ magneticBtns.forEach((btn) => {
 
     btn.addEventListener('mouseenter', () => {
         cursor.classList.add('hovering');
-        playHoverSound();
     });
 
     btn.addEventListener('mouseleave', () => {
